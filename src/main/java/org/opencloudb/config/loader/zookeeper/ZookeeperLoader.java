@@ -1,5 +1,6 @@
 package org.opencloudb.config.loader.zookeeper;
 
+import cn.thinkjoy.cloudstack.context.CloudContextFactory;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -25,6 +26,11 @@ public class ZookeeperLoader {
 
     protected String zkURl;
     private String domain = "";
+
+
+    private final static String productCode = CloudContextFactory.getCloudContext().getProductCode();
+    private final static String bizSystem = CloudContextFactory.getCloudContext().getApplicationName();
+
 
     public JSONObject loadConfig(Properties properties) throws Exception {
 
@@ -81,7 +87,7 @@ public class ZookeeperLoader {
         try {
             curatorFramework.blockUntilConnected(3, TimeUnit.SECONDS);
             if (curatorFramework.getZookeeperClient().isConnected()) {
-                return curatorFramework.usingNamespace("configs/ucenter/ucenter/mycat");
+                return curatorFramework.usingNamespace("configs/" + productCode + "/" + bizSystem + "/mycat");
             }
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();

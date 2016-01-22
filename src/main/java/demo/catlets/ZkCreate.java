@@ -1,5 +1,6 @@
 package demo.catlets;
 
+import cn.thinkjoy.cloudstack.context.CloudContextFactory;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -31,11 +32,17 @@ public class ZkCreate {
 
     private static String ZK_CONFIG_FILE_NAME = "/zk-create.yaml";
     private static CuratorFramework framework;
-    //private static Map<String, Object> zkConfig;
     private static Map<String, Object> zkConfig = new HashMap<String, Object>();
-    //initialized by shenhai.yan for line 40 NullPointerException
+
+    private final static String productCode = CloudContextFactory.getCloudContext().getProductCode();
+    private final static String bizSystem = CloudContextFactory.getCloudContext().getApplicationName();
+
+
+    //  private static String product = CloudContextFactory.
+
 
     public static void main(String[] args) {
+
         String url;
         if (args != null && args.length > 0) {
             ZK_CONFIG_FILE_NAME = args[0];
@@ -46,6 +53,7 @@ public class ZkCreate {
 
         zkConfig = loadZkConfig();
         framework = createConnection(url);
+
 
         createConfig(MYCAT_HOST_KEY, false, MYCAT_HOST_KEY);
         createConfig(MYCAT_ZONE_KEY, false, MYCAT_ZONE_KEY);
@@ -152,7 +160,7 @@ public class ZkCreate {
         try {
             curatorFramework.blockUntilConnected(3, TimeUnit.SECONDS);
             if (curatorFramework.getZookeeperClient().isConnected()) {
-                return curatorFramework.usingNamespace("configs/ucenter/ucenter/mycat");
+                return curatorFramework.usingNamespace("configs/" + productCode + "/" + bizSystem + "/mycat");
             }
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();
