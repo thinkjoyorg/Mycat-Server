@@ -10,7 +10,6 @@ import org.opencloudb.config.loader.zookeeper.loader.MysqlsLoader;
 import org.opencloudb.config.loader.zookeeper.loader.NodesLoader;
 import org.opencloudb.util.ZkIpUtil;
 
-import java.net.InetAddress;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +30,7 @@ public class ZookeeperLoader {
 
         zkURl = ZkIpUtil.zkIp();
         CuratorFramework curatorFramework =
-            buildConnection(zkURl);
+                buildConnection(zkURl);
 
         return takeConfig(properties.getProperty(MYID_KEY), curatorFramework);
     }
@@ -42,15 +41,13 @@ public class ZookeeperLoader {
          */
 
 
-
-
         JSONObject node = new NodesLoader(curatorFramework).takeConfig(myid);
 
         /**
          * take cluster data from path /mycat/mycat-cluster/{myCluster} in zookeeper
          */
         JSONObject cluster =
-            new ClusterLoader(curatorFramework).takeConfig(node.getString("cluster"));
+                new ClusterLoader(curatorFramework).takeConfig(node.getString("cluster"));
 
         /**
          * take mysqlgroup data from path /mycat/mycat-mysqlgroup in zookeeper
@@ -76,7 +73,7 @@ public class ZookeeperLoader {
 
     private CuratorFramework buildConnection(String url) {
         CuratorFramework curatorFramework =
-            CuratorFrameworkFactory.newClient(url, new ExponentialBackoffRetry(100, 6));
+                CuratorFrameworkFactory.newClient(url, new ExponentialBackoffRetry(100, 6));
 
         //start connection
         curatorFramework.start();
@@ -84,7 +81,7 @@ public class ZookeeperLoader {
         try {
             curatorFramework.blockUntilConnected(3, TimeUnit.SECONDS);
             if (curatorFramework.getZookeeperClient().isConnected()) {
-                return curatorFramework.usingNamespace("mycat");
+                return curatorFramework.usingNamespace("configs/ucenter/ucenter/mycat");
             }
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();
