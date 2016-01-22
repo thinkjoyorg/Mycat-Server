@@ -152,7 +152,7 @@ public class ZkCreate {
         try {
             curatorFramework.blockUntilConnected(3, TimeUnit.SECONDS);
             if (curatorFramework.getZookeeperClient().isConnected()) {
-                return curatorFramework.usingNamespace("mycat");
+                return curatorFramework.usingNamespace("configs/ucenter/ucenter/mycat");
             }
         } catch (InterruptedException ignored) {
             Thread.currentThread().interrupt();
