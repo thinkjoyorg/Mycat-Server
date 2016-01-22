@@ -42,6 +42,7 @@ public abstract class AbstractLoader {
      * get data from zookeeper and convert to string with check not null.
      */
     protected String getDataToString(String path) throws Exception {
+
         byte[] raw = curator.getData().forPath(path);
         checkNotNull(raw, "data of " + path + " must be not null!");
 

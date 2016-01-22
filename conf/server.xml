@@ -1,0 +1,23 @@
+<!DOCTYPE mycat:server SYSTEM "server.dtd">
+<mycat:server xmlns:mycat="http://org.opencloudb/">
+    <system>
+        <property name="processorBufferChunk">1310720</property>
+        <property name="maxStringLiteralLength">65535</property>
+        <property name="usingAIO">1</property>
+        <property name="defaultSqlParser">druidparser</property>
+        <property name="sequnceHandlerType">1</property>
+        <property name="managerPort">9066</property>
+        <property name="processors">8</property>
+        <property name="useCompression">1</property>
+        <property name="processorExecutor">8</property>
+    </system>
+    <user name="ucenter">
+        <property name="password">ucenter</property>
+        <property name="schemas">ucenter</property>
+    </user>
+    <user name="user">
+        <property name="password">admin</property>
+        <property name="schemas">ucenter</property>
+        <property name="readOnly">true</property>
+    </user>
+</mycat:server>

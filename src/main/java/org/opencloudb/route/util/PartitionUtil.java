@@ -27,7 +27,7 @@ import org.opencloudb.util.StringUtil;
 
 /**
  * 数据分区工具
- * 
+ *
  * @author mycat
  */
 public final class PartitionUtil {
@@ -43,11 +43,12 @@ public final class PartitionUtil {
 
     /**
      * <pre>
-     * @param count 表示定义的分区数
+     *
+     * @param count  表示定义的分区数
      * @param length 表示对应每个分区的取值长度
-     * 注意：其中count,length两个数组的长度必须是一致的。
-     * 约束：1024 = sum((count[i]*length[i])). count和length两个向量的点积恒等于1024
-     * </pre>
+     *               注意：其中count,length两个数组的长度必须是一致的。
+     *               约束：1024 = sum((count[i]*length[i])). count和length两个向量的点积恒等于1024
+     *               </pre>
      */
     public PartitionUtil(int[] count, int[] length) {
         if (count == null || length == null || (count.length != length.length)) {
@@ -83,6 +84,24 @@ public final class PartitionUtil {
 
     public int partition(String key, int start, int end) {
         return partition(StringUtil.hash(key, start, end));
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(1024 / 32);
+        int[] count = new int[]{32};
+        int[] length = new int[]{32};
+        PartitionUtil pu = new PartitionUtil(count, length);
+        String memberId = "qi";
+        for (int i = 0; i < 320; i++) {
+            int partNo2 = pu.partition(i + "", 0, 8);
+            System.out.println(partNo2);
+        }
+
+//        System.out.println("======================================================");
+//        for (int i = 0; i < 32; i++) {
+//            System.out.println(String.valueOf(i).hashCode() % 32);
+//        }
+
     }
 
 }

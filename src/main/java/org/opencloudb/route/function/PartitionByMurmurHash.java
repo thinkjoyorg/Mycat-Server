@@ -192,7 +192,7 @@ public class PartitionByMurmurHash extends AbstractPartitionAlgorithm implements
 
 	private static void hashTest() throws IOException{
 		PartitionByMurmurHash hash=new PartitionByMurmurHash();
-		hash.count=10;//分片数
+		hash.count=4;//分片数
 		hash.init();
 		
 		int[] bucket=new int[hash.count];
@@ -261,6 +261,10 @@ public class PartitionByMurmurHash extends AbstractPartitionAlgorithm implements
 		}
 	}
 	public static void main(String[] args) throws IOException {
-		hashTest();
+//		hashTest();
+        PartitionByMurmurHash hash=new PartitionByMurmurHash();
+        hash.count=4;//分片数
+        hash.init();
+        System.out.println(hash.calculate("'11111'"));
 	}
 }

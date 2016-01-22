@@ -6,10 +6,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-
 import org.opencloudb.cache.LayerCachePool;
 import org.opencloudb.config.ErrorCode;
-import org.opencloudb.config.Fields;
 import org.opencloudb.config.model.SchemaConfig;
 import org.opencloudb.config.model.SystemConfig;
 import org.opencloudb.net.mysql.FieldPacket;
@@ -26,7 +24,6 @@ import org.opencloudb.sqlengine.EngineCtx;
 import org.opencloudb.sqlengine.SQLJobHandler;
 import org.opencloudb.util.ByteUtil;
 import org.opencloudb.util.ResultSetUtil;
-
 
 
 //import org.opencloudb.route.RouteStrategy;
@@ -62,11 +59,7 @@ public class ShareJoin implements Catlet {
 	private int sendField=0;
 	private boolean childRoute=false;
 	private boolean jointTableIsData=false;
-	// join 字段的类型，一般情况都是int, long; 增加该字段为了支持非int,long类型的(一般为varchar)joinkey的sharejoin
- 	// 参见：io.mycat.server.packet.FieldPacket 属性： public int type;
- 	// 参见：http://dev.mysql.com/doc/internals/en/com-query-response.html#packet-Protocol::ColumnDefinition
- 	private int joinKeyType = Fields.FIELD_TYPE_LONG; // 默认 join 字段为int型
- 	
+	
 	//重新路由使用
 	private SystemConfig sysConfig; 
 	private SchemaConfig schema;
@@ -206,12 +199,7 @@ public class ShareJoin implements Catlet {
 			theId=e.getKey();
 			batchRows.put(theId, rows.remove(theId));
 			if (!svalue.equals(e.getValue())){
-				if(joinKeyType == Fields.FIELD_TYPE_VAR_STRING 
-						|| joinKeyType == Fields.FIELD_TYPE_STRING){ // joinkey 为varchar
-						sb.append("'").append(e.getValue()).append("'").append(','); // ('digdeep','yuanfang') 
-				}else{ // 默认joinkey为int/long
-					sb.append(e.getValue()).append(','); // (1,2,3) 
-				}
+			  sb.append(e.getValue()).append(',');
 			}
 			svalue=e.getValue();
 			if (count++ > batchSize) {
@@ -267,13 +255,12 @@ public class ShareJoin implements Catlet {
 		ctx.writeRow(rowDataPkg);
 	}
 	
-	public int getFieldIndex(List<byte[]> fields,String fkey){
+	public static int getFieldIndex(List<byte[]> fields,String fkey){
 		int i=0;
 		for (byte[] field :fields) {	
 			  FieldPacket fieldPacket = new FieldPacket();
 			  fieldPacket.read(field);	
 			  if (ByteUtil.getString(fieldPacket.name).equals(fkey)){
-				  joinKeyType = fieldPacket.type;
 				  return i;				  
 			  }
 			  i++;

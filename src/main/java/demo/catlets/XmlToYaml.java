@@ -6,6 +6,7 @@ import org.opencloudb.config.loader.zookeeper.entitiy.Property;
 import org.opencloudb.config.loader.zookeeper.entitiy.Rules;
 import org.opencloudb.config.loader.zookeeper.entitiy.Schemas;
 import org.opencloudb.config.loader.zookeeper.entitiy.Server;
+import org.opencloudb.util.ZkIpUtil;
 import org.yaml.snakeyaml.Yaml;
 
 import javax.xml.bind.JAXBContext;
@@ -32,22 +33,20 @@ public class XmlToYaml {
 
     public static void main(String[] args) throws JAXBException, IOException, XMLStreamException {
         jaxbContext = JAXBContext
-            .newInstance(org.opencloudb.config.loader.zookeeper.entitiy.Server.class,
-                org.opencloudb.config.loader.zookeeper.entitiy.Rules.class,
-                org.opencloudb.config.loader.zookeeper.entitiy.Schemas.class);
+                .newInstance(org.opencloudb.config.loader.zookeeper.entitiy.Server.class,
+                        org.opencloudb.config.loader.zookeeper.entitiy.Rules.class,
+                        org.opencloudb.config.loader.zookeeper.entitiy.Schemas.class);
         unmarshaller = jaxbContext.createUnmarshaller();
 
-        if (args.length > 0) {
-            MYCLUSTER_ID = args[0];
-        }
 
+        MYCLUSTER_ID = "mycat-cluster-1";
         try (
-            InputStream schemaStream = XmlToYaml.class.getResourceAsStream("/schema.xml");
-            InputStream serverStream = XmlToYaml.class.getResourceAsStream("/server.xml");
-            InputStream ruleStream = XmlToYaml.class.getResourceAsStream("/rule.xml");
-            InputStream myidStream = XmlToYaml.class.getResourceAsStream("/myid.properties");
-            FileWriter fileWriter = new FileWriter(
-                XmlToYaml.class.getResource("/zk-create.yaml").getFile())
+                InputStream schemaStream = XmlToYaml.class.getResourceAsStream("/schema.xml");
+                InputStream serverStream = XmlToYaml.class.getResourceAsStream("/server.xml");
+                InputStream ruleStream = XmlToYaml.class.getResourceAsStream("/rule.xml");
+                InputStream myidStream = XmlToYaml.class.getResourceAsStream("/myid.properties");
+                FileWriter fileWriter = new FileWriter(
+                        XmlToYaml.class.getResource("/zk-create.yaml").getFile())
 
         ) {
             Preconditions.checkNotNull(myidStream, "have not myid file");
@@ -55,14 +54,16 @@ public class XmlToYaml {
             properties.load(myidStream);
 
             serializeMap = new LinkedHashMap<>();
-            serializeMap.put("zkURL", properties.getProperty("zkURL"));
+            serializeMap.put("zkURL", ZkIpUtil.zkIp());
 
             Server server = loadServer(serverStream);
             serializeMap.put("mycat-cluster",
-                process(loadSchema(schemaStream), loadRule(ruleStream), server));
+                    process(loadSchema(schemaStream), loadRule(ruleStream), server));
             serializeMap.put("mycat-nodes", processServer(server, properties.getProperty("myid")));
 
             fileWriter.write(new Yaml().dumpAsMap(serializeMap));
+            fileWriter.flush();
+            fileWriter.close();
         }
     }
 
@@ -74,11 +75,13 @@ public class XmlToYaml {
 
         LinkedHashMap<Object, Object> systemParams = new LinkedHashMap<>();
         propertyToMap(server.getSystem().getProperty(), new PropertyRunner(systemParams) {
-            @Override public boolean match(Property property) {
+            @Override
+            public boolean match(Property property) {
                 return false;
             }
 
-            @Override public void run(Property property) {
+            @Override
+            public void run(Property property) {
             }
         });
         map.put("systemParams", systemParams);
@@ -89,7 +92,7 @@ public class XmlToYaml {
     }
 
     private static LinkedHashMap<Object, Object> process(Schemas schemas, Rules rules,
-        Server server) {
+                                                         Server server) {
         LinkedHashMap<Object, Object> clusterMap = new LinkedHashMap<>();
         clusterMap.put("user", processUser(server.getUser()));
         clusterMap.put("rule", processRule(rules));
@@ -177,7 +180,7 @@ public class XmlToYaml {
     }
 
     private static void putMysqlgroup(Schemas.DataHost dataHost,
-        Schemas.DataHost.WriteHost writeHost) {
+                                      Schemas.DataHost.WriteHost writeHost) {
         Object mapObj = serializeMap.get("mycat-mysqlgroup");
         if (mapObj == null) {
             mapObj = new LinkedHashMap<>();
@@ -209,6 +212,7 @@ public class XmlToYaml {
 
     private static Map<Object, Object> processSchema(Schemas schemas) {
         LinkedHashMap<Object, Object> result = new LinkedHashMap<>();
+
         for (Schemas.Schema schema : schemas.getSchema()) {
             LinkedHashMap<Object, Object> schemaMap = new LinkedHashMap<>();
             schemaMap.put("name", schema.getName());
@@ -268,7 +272,7 @@ public class XmlToYaml {
     }
 
     private static Map<Object, Object> processTableChild(
-        Schemas.Schema.Table.ChildTable childTable) {
+            Schemas.Schema.Table.ChildTable childTable) {
         LinkedHashMap<Object, Object> result = new LinkedHashMap<>();
         result.put("name", childTable.getName());
         result.put("joinKey", childTable.getJoinKey());
@@ -302,21 +306,23 @@ public class XmlToYaml {
             Rules.Function fuc = functionMap.get(tableRule.getRule().getAlgorithm().toUpperCase());
 
             final Map<Object, Object> tableRuleMap = new LinkedHashMap<>();
-            tableRuleMap.put("name", fuc.getName());
+            tableRuleMap.put("name", tableRule.getName());
             tableRuleMap.put("functionName", fuc.getClazz());
             tableRuleMap.put("column", tableRule.getRule().getColumns());
 
             //load rule local configuration.
             propertyToMap(fuc.getProperty(), new PropertyRunner(tableRuleMap) {
-                @Override public boolean match(Property property) {
+                @Override
+                public boolean match(Property property) {
                     return property.getName().toUpperCase().equals("MAPFILE");
                 }
 
-                @Override public void run(Property property) {
+                @Override
+                public void run(Property property) {
                     try (InputStream inputStream = getClass()
-                        .getResourceAsStream("/" + property.getValue());
-                        BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(inputStream))) {
+                            .getResourceAsStream("/" + property.getValue());
+                         BufferedReader reader = new BufferedReader(
+                                 new InputStreamReader(inputStream))) {
 
                         String line;
                         Map<Object, Object> configMap = new LinkedHashMap<>();
@@ -346,11 +352,13 @@ public class XmlToYaml {
             Map<Object, Object> userMap = new LinkedHashMap<>();
             userMap.put("name", user.getName());
             propertyToMap(user.getProperty(), new PropertyRunner(userMap) {
-                @Override public boolean match(Property property) {
+                @Override
+                public boolean match(Property property) {
                     return property.getName().equals("schemas");
                 }
 
-                @Override public void run(Property property) {
+                @Override
+                public void run(Property property) {
                     result.put(property.getName(), property.getValue().split(","));
                 }
             });
@@ -370,25 +378,25 @@ public class XmlToYaml {
     }
 
     private static Schemas loadSchema(InputStream inputStream)
-        throws JAXBException, XMLStreamException {
+            throws JAXBException, XMLStreamException {
         XMLStreamReader xsr = getXmlStreamReader(inputStream, "schema.xml");
         return (Schemas) unmarshaller.unmarshal(xsr);
     }
 
     private static Rules loadRule(InputStream inputStream)
-        throws JAXBException, XMLStreamException {
+            throws JAXBException, XMLStreamException {
         XMLStreamReader xsr = getXmlStreamReader(inputStream, "rule.xml");
         return (Rules) unmarshaller.unmarshal(xsr);
     }
 
     private static Server loadServer(InputStream inputStream)
-        throws JAXBException, XMLStreamException {
+            throws JAXBException, XMLStreamException {
         XMLStreamReader xsr = getXmlStreamReader(inputStream, "server.xml");
         return (Server) unmarshaller.unmarshal(xsr);
     }
 
     private static XMLStreamReader getXmlStreamReader(InputStream inputStream, String fileName)
-        throws XMLStreamException {
+            throws XMLStreamException {
         Preconditions.checkNotNull(inputStream, fileName + " is not exist.");
 
         XMLInputFactory xif = XMLInputFactory.newFactory();
@@ -416,7 +424,6 @@ public class XmlToYaml {
             this.result = result;
         }
     }
-
 
     public static abstract class Process<I> {
         public abstract void processort(I i);

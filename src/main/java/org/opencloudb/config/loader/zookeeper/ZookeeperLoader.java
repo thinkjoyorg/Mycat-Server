@@ -8,7 +8,9 @@ import org.opencloudb.config.loader.zookeeper.loader.ClusterLoader;
 import org.opencloudb.config.loader.zookeeper.loader.MysqlGroupLoader;
 import org.opencloudb.config.loader.zookeeper.loader.MysqlsLoader;
 import org.opencloudb.config.loader.zookeeper.loader.NodesLoader;
+import org.opencloudb.util.ZkIpUtil;
 
+import java.net.InetAddress;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -23,10 +25,13 @@ public class ZookeeperLoader {
     public static final String MYID_KEY = "myid";
 
     protected String zkURl;
+    private String domain = "";
 
     public JSONObject loadConfig(Properties properties) throws Exception {
+
+        zkURl = ZkIpUtil.zkIp();
         CuratorFramework curatorFramework =
-            buildConnection((zkURl == null) ? properties.getProperty(ZKURL_KEY) : zkURl);
+            buildConnection(zkURl);
 
         return takeConfig(properties.getProperty(MYID_KEY), curatorFramework);
     }
@@ -35,6 +40,10 @@ public class ZookeeperLoader {
         /**
          * take nodes data from path /mycat/mycat-nodes/{myid} in zookeeper
          */
+
+
+
+
         JSONObject node = new NodesLoader(curatorFramework).takeConfig(myid);
 
         /**

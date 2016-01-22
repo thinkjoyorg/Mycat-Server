@@ -6,6 +6,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.data.Stat;
 import org.json.JSONObject;
+import org.opencloudb.util.ZkIpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -20,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class ZkCreate {
     private static final Logger LOGGER = LoggerFactory.getLogger(ZkCreate.class);
-    private static final String CONFIG_URL_KEY = "zkURL";
     private static final String MYCAT_CLUSTER_KEY = "mycat-cluster";
     private static final String MYCAT_ZONE_KEY = "mycat-zones";
     private static final String MYCAT_NODES_KEY = "mycat-nodes";
@@ -41,9 +41,7 @@ public class ZkCreate {
             ZK_CONFIG_FILE_NAME = args[0];
             url = args[1];
         } else {
-            url = zkConfig.containsKey(CONFIG_URL_KEY) ?
-                (String) zkConfig.get(CONFIG_URL_KEY) :
-                "127.0.0.1:2181";
+            url = ZkIpUtil.zkIp();
         }
 
         zkConfig = loadZkConfig();
@@ -59,7 +57,7 @@ public class ZkCreate {
     }
 
     private static void createConfig(String configKey, boolean filterInnerMap,
-        String configDirectory, String... restDirectory) {
+                                     String configDirectory, String... restDirectory) {
         String childPath = ZKPaths.makePath("/", configDirectory, restDirectory);
         LOGGER.trace("child path is {}", childPath);
 
@@ -75,7 +73,7 @@ public class ZkCreate {
 
             if (mapObject != null) {
                 framework.setData()
-                    .forPath(childPath, new JSONObject(mapObject).toString().getBytes());
+                        .forPath(childPath, new JSONObject(mapObject).toString().getBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,13 +81,13 @@ public class ZkCreate {
     }
 
     private static void createChildConfig(Object mapObject, boolean filterInnerMap,
-        String childPath) {
+                                          String childPath) {
         if (mapObject instanceof Map) {
             Map<Object, Object> innerMap = (Map<Object, Object>) mapObject;
             for (Map.Entry<Object, Object> entry : innerMap.entrySet()) {
                 if (entry.getValue() instanceof Map) {
                     createChildConfig(entry.getValue(), filterInnerMap,
-                        ZKPaths.makePath(childPath, String.valueOf(entry.getKey())));
+                            ZKPaths.makePath(childPath, String.valueOf(entry.getKey())));
                 } else {
                     LOGGER.trace("sub child path is {}", childPath);
                     processLeafNode(innerMap, filterInnerMap, childPath);
@@ -99,7 +97,7 @@ public class ZkCreate {
     }
 
     private static void processLeafNode(Map<Object, Object> innerMap, boolean filterInnerMap,
-        String childPath) {
+                                        String childPath) {
         try {
             Stat restNodeStat = framework.checkExists().forPath(childPath);
             if (restNodeStat == null) {
@@ -115,10 +113,10 @@ public class ZkCreate {
                 }
 
                 framework.setData()
-                    .forPath(childPath, new JSONObject(filtered).toString().getBytes());
+                        .forPath(childPath, new JSONObject(filtered).toString().getBytes());
             } else {
                 framework.setData()
-                    .forPath(childPath, new JSONObject(innerMap).toString().getBytes());
+                        .forPath(childPath, new JSONObject(innerMap).toString().getBytes());
             }
         } catch (Exception e) {
             LOGGER.error("create node error: {} ", e.getMessage(), e);
@@ -126,7 +124,17 @@ public class ZkCreate {
         }
     }
 
-    @SuppressWarnings("unchecked") private static Map<String, Object> loadZkConfig() {
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> loadZkConfig() {
+        String inviroment = null;
+        try {
+            inviroment = new String(framework.getData().forPath("/configs/mycat/mycat/inviroment"), "UTF-8");
+        } catch (Exception e) {
+        }
+
+        if (inviroment != null) {
+            ZK_CONFIG_FILE_NAME = "/zk-create-" + inviroment + ".yaml";
+        }
         InputStream configIS = ZkCreate.class.getResourceAsStream(ZK_CONFIG_FILE_NAME);
         if (configIS == null) {
             throw new RuntimeException("can't find zk properties file : " + ZK_CONFIG_FILE_NAME);
@@ -136,7 +144,7 @@ public class ZkCreate {
 
     private static CuratorFramework createConnection(String url) {
         CuratorFramework curatorFramework =
-            CuratorFrameworkFactory.newClient(url, new ExponentialBackoffRetry(100, 6));
+                CuratorFrameworkFactory.newClient(url, new ExponentialBackoffRetry(100, 6));
 
         //start connection
         curatorFramework.start();

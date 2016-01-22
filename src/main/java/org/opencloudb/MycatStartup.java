@@ -24,7 +24,6 @@
 package org.opencloudb;
 
 import org.apache.log4j.helpers.LogLog;
-import org.opencloudb.config.ZkConfig;
 import org.opencloudb.config.model.SystemConfig;
 
 import java.text.SimpleDateFormat;
@@ -37,8 +36,6 @@ public final class MycatStartup {
     private static final String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
     public static void main(String[] args) {
-        //use zk ?
-        ZkConfig.instance().initZk();
 
         try {
             String home = SystemConfig.getHomePath();

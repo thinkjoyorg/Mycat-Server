@@ -112,6 +112,7 @@ public class IncrSequencePropHandler extends IncrSequenceHandler {
 			props.setProperty(prefixName + KEY_CUR_NAME, val.longValue() + "");
 			OutputStream fos = new FileOutputStream(filePath);
 			props.store(fos, "");
+		
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
 			return false;

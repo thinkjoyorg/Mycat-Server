@@ -32,9 +32,9 @@ public class ZookeeperSaver {
     public ZookeeperSaver() throws Exception {
         super();
         this.jaxbContext = JAXBContext
-            .newInstance(org.opencloudb.config.loader.zookeeper.entitiy.Server.class,
-                org.opencloudb.config.loader.zookeeper.entitiy.Rules.class,
-                org.opencloudb.config.loader.zookeeper.entitiy.Schemas.class);
+                .newInstance(org.opencloudb.config.loader.zookeeper.entitiy.Server.class,
+                        org.opencloudb.config.loader.zookeeper.entitiy.Rules.class,
+                        org.opencloudb.config.loader.zookeeper.entitiy.Schemas.class);
     }
 
     public void saveConfig(JSONObject jsonObject) throws Exception {
@@ -84,7 +84,7 @@ public class ZookeeperSaver {
     }
 
     private List<Schemas.Schema.Table> createSchemaTables(JSONObject tablesJson)
-        throws IOException {
+            throws IOException {
         List<Schemas.Schema.Table> tables = new ArrayList<>();
 
         for (String tableKey : tablesJson.keySet()) {
@@ -120,7 +120,7 @@ public class ZookeeperSaver {
 
         //1 is global table
         if (tablesJson.has("type")) {
-            String talbeType = tablesJson.get("type").toString().equals("1") ? "global" : null;
+            String talbeType = tablesJson.get("type").toString().equals("1") || tablesJson.get("type").toString().equals("global") ? "global" : null;
             table.setType(talbeType);
         }
 
@@ -211,7 +211,7 @@ public class ZookeeperSaver {
     }
 
     private List<Schemas.DataHost.WriteHost> createWriteHost(JSONObject cluster,
-        JSONObject dataHostJson) {
+                                                             JSONObject dataHostJson) {
         String mysqlGroup = dataHostJson.getString("mysqlGroup");
         String dataHostName = dataHostJson.getString("name");
 
@@ -226,7 +226,7 @@ public class ZookeeperSaver {
         currentWrite.setHost(dataHostName);
         currentWrite.setPassword(currentWriteJson.getString("password"));
         currentWrite
-            .setUrl(currentWriteJson.getString("ip") + ":" + currentWriteJson.getInt("port"));
+                .setUrl(currentWriteJson.getString("ip") + ":" + currentWriteJson.getInt("port"));
         currentWrite.setUser(currentWriteJson.getString("user"));
 
         if (currentWriteJson.has("usingDecrypt")) {
@@ -243,7 +243,7 @@ public class ZookeeperSaver {
             if (!readHostName.equals(currentWriteName)) {
                 JSONObject readHostJson = mysqls.getJSONObject(readHostName);
                 Schemas.DataHost.WriteHost.ReadHost readHost =
-                    new Schemas.DataHost.WriteHost.ReadHost();
+                        new Schemas.DataHost.WriteHost.ReadHost();
 
                 readHost.setHost(readHostName);
                 readHost.setPassword(readHostJson.getString("password"));
@@ -304,8 +304,8 @@ public class ZookeeperSaver {
             Path path = Paths.get(getConfigPath() + fileName);
 
             try (BufferedWriter writer = Files
-                .newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
-                    StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)
+                    .newBufferedWriter(path, StandardCharsets.UTF_8, StandardOpenOption.CREATE,
+                            StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)
             ) {
                 for (String key : config.keySet()) {
                     String value = config.get(key).toString();
@@ -392,19 +392,19 @@ public class ZookeeperSaver {
     }
 
     private void marshaller(Object object, String filePathAndName, String dtdName)
-        throws Exception {
+            throws Exception {
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 
         marshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders",
-            String.format("<!DOCTYPE mycat:%1$s SYSTEM \"%1$s.dtd\">", dtdName));
+                String.format("<!DOCTYPE mycat:%1$s SYSTEM \"%1$s.dtd\">", dtdName));
 
         Path path = Paths.get(filePathAndName);
 
         try (OutputStream out = Files
-            .newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING,
-                StandardOpenOption.WRITE)) {
+                .newOutputStream(path, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING,
+                        StandardOpenOption.WRITE)) {
             marshaller.marshal(object, out);
         }
     }

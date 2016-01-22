@@ -1,0 +1,25 @@
+<!DOCTYPE mycat:rule SYSTEM "rule.dtd">
+<mycat:rule xmlns:mycat="http://org.opencloudb/">
+    <tableRule name="sharding-by-murmur-uid">
+        <rule>
+            <columns>uid</columns>
+            <algorithm>sharding-by-murmur-uid</algorithm>
+        </rule>
+    </tableRule>
+    <tableRule name="sharding-by-murmur">
+        <rule>
+            <columns>id</columns>
+            <algorithm>sharding-by-murmur</algorithm>
+        </rule>
+    </tableRule>
+    <function name="sharding-by-murmur-uid" class="org.opencloudb.route.function.PartitionByMurmurHash">
+        <property name="virtualBucketTimes">160</property>
+        <property name="seed">0</property>
+        <property name="count">4</property>
+    </function>
+    <function name="sharding-by-murmur" class="org.opencloudb.route.function.PartitionByMurmurHash">
+        <property name="virtualBucketTimes">160</property>
+        <property name="seed">0</property>
+        <property name="count">4</property>
+    </function>
+</mycat:rule>
