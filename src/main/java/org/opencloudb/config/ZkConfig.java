@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.opencloudb.config.loader.zookeeper.ZookeeperLoader;
 import org.opencloudb.config.loader.zookeeper.ZookeeperSaver;
+import org.opencloudb.util.ZkIpUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +57,7 @@ public class ZkConfig {
 
         if (Boolean.valueOf(pros.getProperty("loadZk"))) {
             //validate
-            String zkURL = pros.getProperty("zkURL");
+            String zkURL = ZkIpUtil.zkIp();
             String myid = pros.getProperty("myid");
 
             if (Strings.isNullOrEmpty(zkURL) || Strings.isNullOrEmpty(myid)) {

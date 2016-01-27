@@ -1,87 +1,89 @@
 <!DOCTYPE mycat:schema SYSTEM "schema.dtd">
 <mycat:schema xmlns:mycat="http://org.opencloudb/">
     <schema name="ucenter" checkSQLschema="false" sqlMaxLimit="100000">
-        <table name="uic_user_child" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_dict_gender" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_classes_bak0115" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_seed_system" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_dept_school_member" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="ucm_user" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_data_model" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="ucm_datagroup" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="bd_dict_world_area" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_bizinfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="ucm_datagroup_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_user" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_seed_system" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_school_xxbb" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dept" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_resource_grid" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_user_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_graduate" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_role_tag" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="oauth_refresh_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_info" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="uid" autoIncrement="true"/>
-        <table name="ucm_user_dimension" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_resource_action" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_family_relationship" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_user_log" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_school_member" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_dict_first_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_school_bxlx_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_globalinfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_dict_setrange" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_information_history" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_class_student" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="ucenter_tag_categories_relationship" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_identity_type" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="uic_user_globalsuminfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_dict_area" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_tag_categories" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="oauth_client_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_class_status" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_tag_item" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_http_ds" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_model" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="oauth_client_details" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="ucm_role_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_classes_bak" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_school_bxlx" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_class_status" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_oauth_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_role" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_tag_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_classes_bak0115" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dept" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_information_history" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="oauth_code" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_bizsuminfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="ucm_user_log" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_school_cj" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_tag_item" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_school_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_lock_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_app_school" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="oauth_refresh_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_school_xxlb" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_tag_group" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_apprange" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_study_period" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_update_logging" dataNode="dn$0-3" rule="sharding-by-murmur" primaryKey="ID"/>
         <table name="bd_dict_teacher_category" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_data_model" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="oauth_access_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_setrange" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_school_term" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_tag_categories" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_resource_grid" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_school" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_account_info" dataNode="dn$0-3" rule="sharding-by-murmur" primaryKey="ID"/>
+        <table name="bd_dict_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_info" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="uid" autoIncrement="true"/>
+        <table name="ucm_role_user" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_biz_sys" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_class_student" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="uic_school_member" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="bd_dict_family_relationship" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_classes_bak" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_app_domain" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_first_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_school_bxlx" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="oauth_client_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_http_ds" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_globalinfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="ucenter_oauth_client_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_user_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="mycat_sequence" dataNode="dn0" primaryKey="ID"/>
+        <table name="uic_user_child" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="ucm_model" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_login_config" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_agency" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_bizinfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="uic_user_identity_type" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="ucm_datagroup_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_school_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_school_xxbb" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_graduate" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_gender" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_app_user_account" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
         <table name="uic_class_teacher" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true">
             <childTable name="uic_class_teach" joinKey="refId" parentKey="id" autoIncrement="false"/>
         </table>
-        <table name="ucenter_tag_group" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_tag_data" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_biz_sys" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_user_bizsuminfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="ucm_user_datagroup" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_oauth_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_school_xxlb" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_apprange" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="oauth_access_token" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_globalsuminfo" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
+        <table name="bd_dict_school_bxlx_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_dict_area" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="bd_agency" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="oauth_client_details" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_dept_school_member" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_classes" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="mycat_sequence" dataNode="dn0" primaryKey="ID"/>
-        <table name="uic_account_info" dataNode="dn$0-3" rule="sharding-by-murmur" primaryKey="ID"/>
-        <table name="bd_school_grade" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_school" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_role_user" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_app_school" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_dict_study_period" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_oauth_client_resource" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_update_logging" dataNode="dn$0-3" rule="sharding-by-murmur" primaryKey="ID"/>
-        <table name="ucenter_login_config" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="bd_dict_education" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucm_role" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="oauth_code" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_user_datagroup" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="uic_user_role_tag" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucenter_tag_categories_relationship" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_user_dimension" dataNode="dn$0-3" primaryKey="ID" type="global"/>
         <table name="bd_user_role_tag" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="uic_app_user_account" dataNode="dn$0-3" rule="sharding-by-murmur-uid" primaryKey="id" autoIncrement="true"/>
-        <table name="bd_school_cj" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_school_term" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="bd_school_subject" dataNode="dn$0-3" primaryKey="ID" type="global"/>
-        <table name="ucenter_app_domain" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="bd_classes" dataNode="dn$0-3" primaryKey="ID" type="global"/>
+        <table name="ucm_resource_action" dataNode="dn$0-3" primaryKey="ID" type="global"/>
     </schema>
     <dataNode name="dn$0-3" dataHost="host0" database="ucenter$0-3"/>
     <dataHost balance="0" maxCon="1000" minCon="10" name="host0" slaveThreshold="100" dbType="mysql" dbDriver="native">

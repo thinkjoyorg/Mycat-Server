@@ -71,6 +71,7 @@
         <table name="uic_user_role_tag" primaryKey="ID" type="global" dataNode="dn$0-3"/>
         <table name="uic_lock_data" primaryKey="ID" type="global" dataNode="dn$0-3"/>
         <table name="ucenter_update_logging_last" primaryKey="ID" type="global" dataNode="dn$0-3"/>
+        <table name="uic_export_data" primaryKey="ID" type="global" dataNode="dn$0-3"/>
 
 
         <!--以上为全局表-->

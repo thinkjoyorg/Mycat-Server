@@ -1,4 +1,4 @@
-zkURL: 10.10.72.35:2181
+zkURL: 10.10.72.35
 mycat-mysqlgroup:
   hostM1:
     name: hostM1
@@ -65,322 +65,322 @@ mycat-cluster:
           name: bd_agency
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_app_school:
           name: bd_app_school
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_apprange:
           name: bd_apprange
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_classes:
           name: bd_classes
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
-        bd_classes_bak:
-          name: bd_classes_bak
-          datanode: dn$0-3
-          primaryKey: ID
-          type: '1'
-        bd_classes_bak0115:
-          name: bd_classes_bak0115
-          datanode: dn$0-3
-          primaryKey: ID
-          type: '1'
+          type: global
         bd_dept:
           name: bd_dept
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_area:
           name: bd_dict_area
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_class_status:
           name: bd_dict_class_status
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_education:
           name: bd_dict_education
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_family_relationship:
           name: bd_dict_family_relationship
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_first_subject:
           name: bd_dict_first_subject
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_gender:
           name: bd_dict_gender
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_grade:
           name: bd_dict_grade
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_graduate:
           name: bd_dict_graduate
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_school_bxlx:
           name: bd_dict_school_bxlx
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_school_bxlx_grade:
           name: bd_dict_school_bxlx_grade
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_school_xxbb:
           name: bd_dict_school_xxbb
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_school_xxlb:
           name: bd_dict_school_xxlb
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_seed_system:
           name: bd_dict_seed_system
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_setrange:
           name: bd_dict_setrange
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_study_period:
           name: bd_dict_study_period
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_subject:
           name: bd_dict_subject
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_teacher_category:
           name: bd_dict_teacher_category
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_dict_world_area:
           name: bd_dict_world_area
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_information_history:
           name: bd_information_history
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_school:
           name: bd_school
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
-        bd_school_cj:
-          name: bd_school_cj
-          datanode: dn$0-3
-          primaryKey: ID
-          type: '1'
+          type: global
         bd_school_grade:
           name: bd_school_grade
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_school_subject:
           name: bd_school_subject
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_school_term:
           name: bd_school_term
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         bd_user_role_tag:
           name: bd_user_role_tag
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         oauth_access_token:
           name: oauth_access_token
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         oauth_client_details:
           name: oauth_client_details
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         oauth_client_token:
           name: oauth_client_token
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         oauth_code:
           name: oauth_code
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         oauth_refresh_token:
           name: oauth_refresh_token
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_app_domain:
           name: ucenter_app_domain
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_login_config:
           name: ucenter_login_config
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_oauth_client_resource:
           name: ucenter_oauth_client_resource
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_oauth_resource:
           name: ucenter_oauth_resource
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_tag_categories:
           name: ucenter_tag_categories
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_tag_categories_relationship:
           name: ucenter_tag_categories_relationship
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_tag_data:
           name: ucenter_tag_data
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_tag_group:
           name: ucenter_tag_group
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucenter_tag_item:
           name: ucenter_tag_item
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_biz_sys:
           name: ucm_biz_sys
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_data_model:
           name: ucm_data_model
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_datagroup:
           name: ucm_datagroup
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_datagroup_data:
           name: ucm_datagroup_data
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_http_ds:
           name: ucm_http_ds
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_model:
           name: ucm_model
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_resource:
           name: ucm_resource
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_resource_action:
           name: ucm_resource_action
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_resource_grid:
           name: ucm_resource_grid
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_role:
           name: ucm_role
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_role_resource:
           name: ucm_role_resource
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_role_user:
           name: ucm_role_user
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_user:
           name: ucm_user
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_user_data:
           name: ucm_user_data
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_user_datagroup:
           name: ucm_user_datagroup
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_user_dimension:
           name: ucm_user_dimension
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         ucm_user_log:
           name: ucm_user_log
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
         uic_user_role_tag:
           name: uic_user_role_tag
           datanode: dn$0-3
           primaryKey: ID
-          type: '1'
+          type: global
+        uic_lock_data:
+          name: uic_lock_data
+          datanode: dn$0-3
+          primaryKey: ID
+          type: global
+        ucenter_update_logging_last:
+          name: ucenter_update_logging_last
+          datanode: dn$0-3
+          primaryKey: ID
+          type: global
+        uic_export_data:
+          name: uic_export_data
+          datanode: dn$0-3
+          primaryKey: ID
+          type: global
         mycat_sequence:
           name: mycat_sequence
           datanode: dn0

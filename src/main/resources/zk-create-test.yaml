@@ -366,6 +366,24 @@ mycat-cluster:
           datanode: dn$0-3
           primaryKey: ID
           type: global
+
+             uic_lock_data:
+                    name: uic_lock_data
+                    datanode: dn$0-3
+                    primaryKey: ID
+                    type: global
+                  ucenter_update_logging_last:
+                    name: ucenter_update_logging_last
+                    datanode: dn$0-3
+                    primaryKey: ID
+                    type: global
+                  uic_export_data:
+                    name: uic_export_data
+                    datanode: dn$0-3
+                    primaryKey: ID
+                    type: global
+
+
         mycat_sequence:
           name: mycat_sequence
           datanode: dn0
